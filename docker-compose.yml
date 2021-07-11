@@ -1,0 +1,23 @@
+version: "3"
+services:
+  app:
+    env_file:
+      - $ENV_FILE
+    command: ['sh', 'ops/scripts/run_server.sh']
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+    image: kozubenko/kittens-store
+    depends_on:
+      - db
+  db:
+    image: postgres:10-alpine
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: password
+
+volumes:
+  postgresql:

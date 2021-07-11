@@ -1,0 +1,1 @@
+docker push kozubenko/kittens-store:$1
